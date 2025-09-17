@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaMaster Pro - Complete Java Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --secondary-dark: #d97706;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --accent: #8b5cf6;
+            
+            --header-height: 70px;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            animation: slideDown 0.5s ease;
+        }
+        
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 2.2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+            animation: slideUp 1s ease;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            animation: fadeIn 1.5s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover:before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Topics Section */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
+        }
+        
+        .topics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .topic-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 1s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+        
+        .topic-card-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-card-header i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .topic-card-body {
+            padding: 1.5rem;
+        }
+        
+        .topic-card-body p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+        
+        .topic-card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--darker);
+        }
+        
+        /* Compiler Section */
+        .compiler-section {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 4rem;
+            animation: fadeIn 1.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .compiler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .compiler-header h2 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .code-editor-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .editor-header {
+            background: var(--darker);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .editor-header .file-name {
+            display: flex;
+            align-items: center;
+            color: var(--light);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .editor-header .file-name i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .editor-actions button {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .editor-actions button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+        
+        .code-editor {
+            width: 100%;
+            min-height: 250px;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 1.5rem;
+            background: #1a1a1a;
+            color: #f8f8f2;
+            border: none;
+            resize: vertical;
+            line-height: 1.5;
+            tab-size: 4;
+            overflow: auto;
+        }
+        
+        .compiler-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .output-container {
+            background: #1a1a1a;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            min-height: 150px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #f8f8f2;
+            overflow: auto;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .output-header h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        /* Article Section */
+        .article-section {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .article-section.active {
+            display: block;
+        }
+        
+        .article-header {
+            margin-bottom: 2rem;
+        }
+        
+        .article-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content code {
+            background: #1a1a1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #f1fa8c;
+        }
+        
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Features Section */
+        .features-section {
+            margin: 4rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+        
+        .feature-card p {
+            color: #cbd5e1;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo-icon {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .footer-description {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a i {
+            margin-right: 8px;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+        }
+        
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--darker);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                transition: 0.5s;
+                z-index: 999;
+                gap: 2rem;
+            }
+            
+            nav ul.show {
+                right: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .topics-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .compiler-controls {
+                flex-direction: column;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* Code Syntax Highlighting */
+        .code-example {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.5;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-keyword {
+            color: #ff79c6;
+        }
+        
+        .code-class {
+            color: #8be9fd;
+        }
+        
+        .code-function {
+            color: #50fa7b;
+        }
+        
+        .code-string {
+            color: #f1fa8c;
+        }
+        
+        .code-comment {
+            color: #6272a4;
+        }
+        
+        .code-annotation {
+            color: #ffb86c;
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0.1;
+            filter: blur(20px);
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        .float-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .float-2 {
+            top: 60%;
+            right: 10%;
+            animation-delay: -2s;
+        }
+        
+        .float-3 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -5s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Quiz Component */
+        .quiz-container {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-option {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quiz-option:hover {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .quiz-option.selected {
+            background: var(--primary);
+        }
+        
+        .quiz-option.correct {
+            background: var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background: var(--danger);
+        }
+        
+        .quiz-feedback {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+            display: block;
+        }
+        
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            display: block;
+        }
+        
+        /* Tabbed Content */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tab.active {
+            background: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background elements -->
+    <div class="floating-element float-1"></div>
+    <div class="floating-element float-2"></div>
+    <div class="floating-element float-3"></div>
+    
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fab fa-java"></i></span>
+                <span>JavaMaster Pro</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#topics">Topics</a></li>
+                    <li><a href="#compiler">Compiler</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Master Java Like a Senior Developer</h1>
+                <p>An immersive learning platform designed to take you from Java basics to advanced concepts with professional-grade examples, interactive coding, and real-world projects.</p>
+                <a href="#topics" class="cta-button">Start Learning Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section id="topics">
+            <h2 class="section-title">Java Topics</h2>
+            <div class="topics-container">
+                <!-- Topic Cards will be added here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Article Sections will be added here by JavaScript -->
+
+        <section id="compiler" class="compiler-section">
+            <div class="compiler-header">
+                <h2>Interactive Java Compiler</h2>
+            </div>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <div class="file-name">
+                        <i class="fas fa-file-code"></i>
+                        <span>Main.java</span>
+                    </div>
+                    <div class="editor-actions">
+                        <button title="Format Code"><i class="fas fa-indent"></i></button>
+                        <button title="Save Code"><i class="fas fa-save"></i></button>
+                        <button title="Share Code"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <textarea class="code-editor" id="java-code" placeholder="Enter your Java code here..." spellcheck="false">
+public class Main {
+    public static void main(String[] args) {
+        // Your code here
+        System.out.println("Hello, Java World!");
+        
+        // Example of a simple calculation
+        int a = 10;
+        int b = 20;
+        int sum = a + b;
+        System.out.println("The sum is: " + sum);
+        
+        // Example of a loop
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Iteration: " + i);
+        }
+    }
+}</textarea>
+            </div>
+            <div class="compiler-controls">
+                <button class="btn btn-primary" onclick="runCode()">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+                <button class="btn btn-secondary" onclick="clearCode()">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+                <button class="btn btn-secondary" onclick="shareCode()">
+                    <i class="fas fa-share"></i> Share
+                </button>
+                <button class="btn btn-secondary" onclick="formatCode()">
+                    <i class="fas fa-indent"></i> Format
+                </button>
+            </div>
+            <div class="output-container">
+                <div class="output-header">
+                    <h3>Output</h3>
+                    <button onclick="clearOutput()"><i class="fas fa-times"></i> Clear</button>
+                </div>
+                <div id="output">// Code output will appear here</div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <h2 class="section-title">Why Choose JavaMaster Pro</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Interactive Coding</h3>
+                    <p>Practice Java right in your browser with our advanced compiler and instant feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Expert Content</h3>
+                    <p>Learn from professionally crafted tutorials designed by industry experts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access lessons and code from any device, anywhere with our responsive design.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Real Projects</h3>
+                    <p>Build portfolio-worthy projects that demonstrate your Java skills to employers.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-logo">
+                    <span class="footer-logo-icon"><i class="fab fa-java"></i></span>
+                    <span>JavaMaster Pro</span>
+                </div>
+                <p class="footer-description">The premier platform for mastering Java programming and advancing your career in software development.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links-column">
+                <h3 class="footer-heading">Learn</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Java Basics</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> OOP Principles</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Data Structures</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Algorithms</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Spring Framework</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h3 class="footer-heading">Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cheat Sheets</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Project Ideas</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Interview Prep</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h3 class="footer-heading">Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 JavaMaster Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Java topics data with detailed articles and examples
+        const javaTopics = [
+            {
+                id: 'intro',
+                title: 'Introduction to Java',
+                icon: 'fas fa-star',
+                description: 'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.',
+                content: `
+                    <div class="article-header">
+                        <h2>Introduction to Java</h2>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 10 min read</span>
+                            <span><i class="fas fa-level-down-alt"></i> Beginner</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>Java is a popular programming language, created in 1995. It is owned by Oracle, and more than 3 billion devices run Java.</p>
+                        
+                        <h3>What is Java Used For?</h3>
+                        <p>Java is widely used for various types of applications:</p>
+                        <ul>
+                            <li>Mobile applications (especially Android apps)</li>
+                            <li>Desktop applications</li>
+                            <li>Web applications</li>
+                            <li>Web servers and application servers</li>
+                            <li>Games</li>
+                            <li>Database connection</li>
+                            <li>And much, much more!</li>
+                        </ul>
+                        
+                        <h3>Why Use Java?</h3>
+                        <p>Java works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc.). It is one of the most popular programming languages in the world. It has a large demand in the current job market. It is easy to learn and simple to use. It is open-source and free. It is secure, fast and powerful. It has huge community support (tens of millions of developers).</p>
+                        
+                        <h3>Java Example</h3>
+                        <p>Here's a simple Java program that prints "Hello World" to the console:</p>
+                        <div class="code-example">
+                            <span class="code-keyword">public class</span> <span class="code-class">Main</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Hello World"</span>);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h3>How Java Works</h3>
+                        <p>Java is both compiled and interpreted. The Java compiler (javac) converts source code into bytecode. This bytecode is then executed by the Java Virtual Machine (JVM), which interprets the bytecode and executes it on the specific platform.</p>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question">What is the name of the Java Virtual Machine?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option" data-correct="true">JVM</div>
+                                <div class="quiz-option">JRE</div>
+                                <div class="quiz-option">JDK</div>
+                                <div class="quiz-option">JAV</div>
+                            </div>
+                            <div class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="article-navigation">
+                        <button class="btn btn-secondary" onclick="showTopic('syntax')">
+                            <i class="fas fa-arrow-left"></i> Previous Topic
+                        </button>
+                        <button class="btn btn-primary" onclick="showTopic('syntax')">
+                            Next Topic <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `
+            },
+            {
+                id: 'syntax',
+                title: 'Java Syntax',
+                icon: 'fas fa-code',
+                description: 'Learn the basic syntax of Java programming language.',
+                content: `
+                    <div class="article-header">
+                        <h2>Java Syntax</h2>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 15 min read</span>
+                            <span><i class="fas fa-level-down-alt"></i> Beginner</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>Java syntax is based on C and C++, but has a simpler object model and fewer low-level facilities. In this section, we'll cover the basic syntax rules of Java.</p>
+                        
+                        <h3>Basic Syntax Rules</h3>
+                        <ul>
+                            <li>Java is case-sensitive: "MyClass" and "myclass" are different</li>
+                            <li>Class names should start with an uppercase letter</li>
+                            <li>Method names should start with a lowercase letter</li>
+                            <li>The name of the Java file must exactly match the class name</li>
+                            <li>Every application must contain a main() method</li>
+                        </ul>
+                        
+                        <h3>Java Identifiers</h3>
+                        <p>Identifiers are names given to classes, variables, methods, etc. Rules for identifiers:</p>
+                        <ul>
+                            <li>Can include letters, digits, underscores, and dollar signs</li>
+                            <li>Must begin with a letter, underscore (_), or dollar sign ($)</li>
+                            <li>Cannot be a Java keyword</li>
+                            <li>Are case-sensitive</li>
+                        </ul>
+                        
+                        <h3>Java Variables</h3>
+                        <p>Variables are containers for storing data values. In Java, there are different types of variables:</p>
+                        <ul>
+                            <li><strong>String</strong> - stores text</li>
+                            <li><strong>int</strong> - stores integers</li>
+                            <li><strong>float</strong> - stores floating point numbers</li>
+                            <li><strong>char</strong> - stores single characters</li>
+                            <li><strong>boolean</strong> - stores true/false values</li>
+                        </ul>
+                        
+                        <h3>Example: Variables and Data Types</h3>
+                        <div class="code-example">
+                            <span class="code-keyword">public class</span> <span class="code-class">Main</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Declare variables</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">String</span> name = <span class="code-string">"John"</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">int</span> age = <span class="code-annotation">24</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">double</span> height = <span class="code-annotation">1.75</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">char</span> grade = <span class="code-string">'A'</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">boolean</span> isStudent = <span class="code-keyword">true</span>;<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Print variables</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Name: "</span> + name);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Age: "</span> + age);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Height: "</span> + height);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Grade: "</span> + grade);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Is Student: "</span> + isStudent);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question">Which of these is a valid variable name in Java?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option">2name</div>
+                                <div class="quiz-option" data-correct="true">_name</div>
+                                <div class="quiz-option">my-name</div>
+                                <div class="quiz-option">class</div>
+                            </div>
+                            <div class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="article-navigation">
+                        <button class="btn btn-secondary" onclick="showTopic('intro')">
+                            <i class="fas fa-arrow-left"></i> Previous Topic
+                        </button>
+                        <button class="btn btn-primary" onclick="showTopic('oop')">
+                            Next Topic <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `
+            },
+            {
+                id: 'oop',
+                title: 'OOP Principles',
+                icon: 'fas fa-cube',
+                description: 'Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects".',
+                content: `
+                    <div class="article-header">
+                        <h2>Object-Oriented Programming in Java</h2>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 20 min read</span>
+                            <span><i class="fas fa-level-down-alt"></i> Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>Object-oriented programming has several advantages over procedural programming:</p>
+                        <ul>
+                            <li>OOP is faster and easier to execute</li>
+                            <li>OOP provides a clear structure for the programs</li>
+                            <li>OOP helps to keep the Java code DRY "Don't Repeat Yourself", and makes the code easier to maintain, modify and debug</li>
+                            <li>OOP makes it possible to create full reusable applications with less code and shorter development time</li>
+                        </ul>
+                        
+                        <h3>Java - What are Classes and Objects?</h3>
+                        <p>Classes and objects are the two main aspects of object-oriented programming.</p>
+                        <p>Look at the following illustration to see the difference between class and objects:</p>
+                        <p><strong>Class:</strong> Fruit</p>
+                        <p><strong>Objects:</strong> Apple, Banana, Mango</p>
+                        <p>So, a class is a template for objects, and an object is an instance of a class.</p>
+                        <p>When the individual objects are created, they inherit all the variables and methods from the class.</p>
+                        
+                        <h3>Four Pillars of OOP</h3>
+                        
+                        <div class="tabs">
+                            <div class="tab active" data-tab="encapsulation">Encapsulation</div>
+                            <div class="tab" data-tab="inheritance">Inheritance</div>
+                            <div class="tab" data-tab="polymorphism">Polymorphism</div>
+                            <div class="tab" data-tab="abstraction">Abstraction</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="encapsulation">
+                            <h4>Encapsulation</h4>
+                            <p>Encapsulation is the technique of making the fields in a class private and providing access to the fields via public methods. It protects the data from outside interference and misuse.</p>
+                            <div class="code-example">
+                                <span class="code-keyword">public class</span> <span class="code-class">Person</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">private</span> <span class="code-class">String</span> name;<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment">// Getter</span><br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-function">getName</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> name;<br>
+                                &nbsp;&nbsp;}<br>
+                                <br>
+                                &nbsp;&nbsp;<span class="code-comment">// Setter</span><br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">setName</span>(<span class="code-class">String</span> newName) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.name = newName;<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="inheritance">
+                            <h4>Inheritance</h4>
+                            <p>Inheritance allows a class to inherit attributes and methods from another class. The class that inherits is called the subclass, and the class being inherited from is called the superclass.</p>
+                            <div class="code-example">
+                                <span class="code-keyword">class</span> <span class="code-class">Vehicle</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">protected</span> <span class="code-class">String</span> brand = <span class="code-string">"Ford"</span>;<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">honk</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Tuut, tuut!"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                <span class="code-keyword">class</span> <span class="code-class">Car</span> <span class="code-keyword">extends</span> <span class="code-class">Vehicle</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">private</span> <span class="code-class">String</span> modelName = <span class="code-string">"Mustang"</span>;<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">Car</span> myCar = <span class="code-keyword">new</span> <span class="code-class">Car</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;myCar.<span class="code-function">honk</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(myCar.brand + <span class="code-string">" "</span> + myCar.modelName);<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="polymorphism">
+                            <h4>Polymorphism</h4>
+                            <p>Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance. It allows us to perform a single action in different ways.</p>
+                            <div class="code-example">
+                                <span class="code-keyword">class</span> <span class="code-class">Animal</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">animalSound</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"The animal makes a sound"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                <span class="code-keyword">class</span> <span class="code-class">Pig</span> <span class="code-keyword">extends</span> <span class="code-class">Animal</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">animalSound</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"The pig says: wee wee"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                <span class="code-keyword">class</span> <span class="code-class">Dog</span> <span class="code-keyword">extends</span> <span class="code-class">Animal</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">animalSound</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"The dog says: bow wow"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="abstraction">
+                            <h4>Abstraction</h4>
+                            <p>Abstraction is the concept of hiding the complex implementation details and showing only the essential features of the object. In Java, abstraction is achieved using abstract classes and interfaces.</p>
+                            <div class="code-example">
+                                <span class="code-keyword">abstract class</span> <span class="code-class">Animal</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> <span class="code-function">animalSound</span>();<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">sleep</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Zzz"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                <span class="code-keyword">class</span> <span class="code-class">Pig</span> <span class="code-keyword">extends</span> <span class="code-class">Animal</span> {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">animalSound</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"The pig says: wee wee"</span>);<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question">Which OOP concept allows a class to inherit properties from another class?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option">Encapsulation</div>
+                                <div class="quiz-option" data-correct="true">Inheritance</div>
+                                <div class="quiz-option">Polymorphism</div>
+                                <div class="quiz-option">Abstraction</div>
+                            </div>
+                            <div class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="article-navigation">
+                        <button class="btn btn-secondary" onclick="showTopic('syntax')">
+                            <i class="fas fa-arrow-left"></i> Previous Topic
+                        </button>
+                        <button class="btn btn-primary" onclick="showTopic('collections')">
+                            Next Topic <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `
+            },
+            {
+                id: 'collections',
+                title: 'Collections Framework',
+                icon: 'fas fa-layer-group',
+                description: 'The Java collections framework provides a set of interfaces and classes to store and manipulate groups of data.',
+                content: `
+                    <div class="article-header">
+                        <h2>Java Collections Framework</h2>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 25 min read</span>
+                            <span><i class="fas fa-level-down-alt"></i> Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>The Java collections framework provides a set of interfaces and classes to implement various data structures and algorithms.</p>
+                        
+                        <h3>Main Interfaces in Collections Framework</h3>
+                        <ul>
+                            <li><strong>List</strong> - Ordered collection (also known as a sequence)</li>
+                            <li><strong>Set</strong> - Collection that contains no duplicate elements</li>
+                            <li><strong>Map</strong> - Object that maps keys to values</li>
+                            <li><strong>Queue</strong> - Collection used to hold multiple elements prior to processing</li>
+                        </ul>
+                        
+                        <h3>Commonly Used Collections</h3>
+                        
+                        <h4>ArrayList</h4>
+                        <p>ArrayList is a resizable array implementation of the List interface. It allows duplicate elements and maintains insertion order.</p>
+                        <div class="code-example">
+                            <span class="code-keyword">import</span> <span class="code-class">java.util.ArrayList</span>;<br>
+                            <br>
+                            <span class="code-keyword">public class</span> <span class="code-class">Main</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">ArrayList</span>&lt;<span class="code-class">String</span>&gt; cars = <span class="code-keyword">new</span> <span class="code-class">ArrayList</span>&lt;<span class="code-class">String</span>&gt;();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Volvo"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"BMW"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Ford"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Mazda"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(cars);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h4>HashMap</h4>
+                        <p>HashMap stores items in "key/value" pairs, and you can access them by an index of another type. It allows null values and null keys.</p>
+                        <div class="code-example">
+                            <span class="code-keyword">import</span> <span class="code-class">java.util.HashMap</span>;<br>
+                            <br>
+                            <span class="code-keyword">public class</span> <span class="code-class">Main</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">HashMap</span>&lt;<span class="code-class">String</span>, <span class="code-class">String</span>&gt; capitalCities = <span class="code-keyword">new</span> <span class="code-class">HashMap</span>&lt;<span class="code-class">String</span>, <span class="code-class">String</span>&gt;();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;capitalCities.<span class="code-function">put</span>(<span class="code-string">"England"</span>, <span class="code-string">"London"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;capitalCities.<span class="code-function">put</span>(<span class="code-string">"Germany"</span>, <span class="code-string">"Berlin"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;capitalCities.<span class="code-function">put</span>(<span class="code-string">"Norway"</span>, <span class="code-string">"Oslo"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;capitalCities.<span class="code-function">put</span>(<span class="code-string">"USA"</span>, <span class="code-string">"Washington DC"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(capitalCities);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h4>HashSet</h4>
+                        <p>HashSet is a collection that stores unique elements. It doesn't maintain any order of elements.</p>
+                        <div class="code-example">
+                            <span class="code-keyword">import</span> <span class="code-class">java.util.HashSet</span>;<br>
+                            <br>
+                            <span class="code-keyword">public class</span> <span class="code-class">Main</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">HashSet</span>&lt;<span class="code-class">String</span>&gt; cars = <span class="code-keyword">new</span> <span class="code-class">HashSet</span>&lt;<span class="code-class">String</span>&gt;();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Volvo"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"BMW"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Ford"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"BMW"</span>); <span class="code-comment">// This will not be added as it's a duplicate</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;cars.<span class="code-function">add</span>(<span class="code-string">"Mazda"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(cars);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question">Which collection does not allow duplicate elements?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option">ArrayList</div>
+                                <div class="quiz-option">LinkedList</div>
+                                <div class="quiz-option" data-correct="true">HashSet</div>
+                                <div class="quiz-option">HashMap</div>
+                            </div>
+                            <div class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="article-navigation">
+                        <button class="btn btn-secondary" onclick="showTopic('oop')">
+                            <i class="fas fa-arrow-left"></i> Previous Topic
+                        </button>
+                        <button class="btn btn-primary" onclick="showTopic('multithreading')">
+                            Next Topic <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `
+            },
+            {
+                id: 'multithreading',
+                title: 'Multithreading',
+                icon: 'fas fa-tasks',
+                description: 'Java multithreading allows concurrent execution of two or more parts of a program for maximum utilization of CPU.',
+                content: `
+                    <div class="article-header">
+                        <h2>Java Multithreading</h2>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 30 min read</span>
+                            <span><i class="fas fa-level-down-alt"></i> Advanced</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>Multithreading in Java is a process of executing multiple threads simultaneously. A thread is a lightweight sub-process, the smallest unit of processing.</p>
+                        
+                        <h3>Advantages of Multithreading</h3>
+                        <ul>
+                            <li>It doesn't block the user because threads are independent</li>
+                            <li>You can perform many operations together, so it saves time</li>
+                            <li>Threads are independent, so an exception in one thread doesn't affect other threads</li>
+                        </ul>
+                        
+                        <h3>Creating Threads</h3>
+                        <p>There are two ways to create a thread in Java:</p>
+                        <ol>
+                            <li>By extending Thread class</li>
+                            <li>By implementing Runnable interface</li>
+                        </ol>
+                        
+                        <h4>Extending Thread Class</h4>
+                        <div class="code-example">
+                            <span class="code-keyword">class</span> <span class="code-class">MultithreadingDemo</span> <span class="code-keyword">extends</span> <span class="code-class">Thread</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">run</span>() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Thread "</span> + <span class="code-class">Thread</span>.<span class="code-function">currentThread</span>().<span class="code-function">getId</span>() + <span class="code-string">" is running"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (<span class="code-class">Exception</span> e) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Exception is caught"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            <span class="code-keyword">public class</span> <span class="code-class">Multithread</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-annotation">0</span>; i &lt; <span class="code-annotation">8</span>; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">MultithreadingDemo</span> object = <span class="code-keyword">new</span> <span class="code-class">MultithreadingDemo</span>();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.<span class="code-function">start</span>();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h4>Implementing Runnable Interface</h4>
+                        <div class="code-example">
+                            <span class="code-keyword">class</span> <span class="code-class">MultithreadingDemo</span> <span class="code-keyword">implements</span> <span class="code-class">Runnable</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">run</span>() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Thread "</span> + <span class="code-class">Thread</span>.<span class="code-function">currentThread</span>().<span class="code-function">getId</span>() + <span class="code-string">" is running"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (<span class="code-class">Exception</span> e) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">System</span>.out.<span class="code-function">println</span>(<span class="code-string">"Exception is caught"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            <span class="code-keyword">public class</span> <span class="code-class">Multithread</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">public static void</span> <span class="code-function">main</span>(<span class="code-class">String</span>[] args) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-annotation">0</span>; i &lt; <span class="code-annotation">8</span>; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">Thread</span> object = <span class="code-keyword">new</span> <span class="code-class">Thread</span>(<span class="code-keyword">new</span> <span class="code-class">MultithreadingDemo</span>());<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.<span class="code-function">start</span>();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h3>Thread Life Cycle</h3>
+                        <p>A thread goes through various stages in its life cycle:</p>
+                        <ol>
+                            <li><strong>New</strong> - A new thread begins its life cycle in the new state.</li>
+                            <li><strong>Runnable</strong> - After a newly born thread is started, the thread becomes runnable.</li>
+                            <li><strong>Running</strong> - When a thread starts executing, it enters the running state.</li>
+                            <li><strong>Blocked</strong> - A thread transitions to the blocked state when it waits to acquire a lock.</li>
+                            <li><strong>Terminated</strong> - A runnable thread enters the terminated state when it completes its task.</li>
+                        </ol>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question">Which method is used to start the execution of a thread?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option">run()</div>
+                                <div class="quiz-option" data-correct="true">start()</div>
+                                <div class="quiz-option">execute()</div>
+                                <div class="quiz-option">begin()</div>
+                            </div>
+                            <div class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="article-navigation">
+                        <button class="btn btn-secondary" onclick="showTopic('collections')">
+                            <i class="fas fa-arrow-left"></i> Previous Topic
+                        </button>
+                        <button class="btn btn-primary" onclick="showTopic('intro')">
+                            Next Topic <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `
+            }
+        ];
+
+        // DOM elements
+        const topicsContainer = document.querySelector('.topics-container');
+        const container = document.querySelector('.container');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const progressBar = document.getElementById('progress-bar');
+
+        // Generate topic cards
+        javaTopics.forEach(topic => {
+            const topicCard = document.createElement('div');
+            topicCard.className = 'topic-card';
+            topicCard.innerHTML = `
+                <div class="topic-card-header">
+                    <i class="${topic.icon}"></i>
+                    ${topic.title}
+                </div>
+                <div class="topic-card-body">
+                    <p>${topic.description}</p>
+                </div>
+                <div class="topic-card-footer">
+                    <button class="btn btn-primary" onclick="showTopic('${topic.id}')">
+                        <i class="fas fa-book-open"></i> Learn More
+                    </button>
+                </div>
+            `;
+            topicsContainer.appendChild(topicCard);
+        });
+
+        // Generate article sections
+        javaTopics.forEach(topic => {
+            const articleSection = document.createElement('section');
+            articleSection.id = `topic-${topic.id}`;
+            articleSection.className = 'article-section';
+            articleSection.innerHTML = topic.content;
+            container.insertBefore(articleSection, document.getElementById('compiler'));
+        });
+
+        // Mobile nav toggle
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+            navToggle.innerHTML = navMenu.classList.contains('show') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Show topic function
+        function showTopic(topicId) {
+            // Hide all topics and articles
+            document.getElementById('topics').style.display = 'none';
+            document.getElementById('compiler').style.display = 'none';
+            document.getElementById('features').style.display = 'none';
+            
+            // Hide all article sections
+            document.querySelectorAll('.article-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected article
+            document.getElementById(`topic-${topicId}`).classList.add('active');
+            
+            // Scroll to the top of the article
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hide topic function
+        function hideTopic() {
+            // Show all main sections
+            document.getElementById('topics').style.display = 'block';
+            document.getElementById('compiler').style.display = 'block';
+            document.getElementById('features').style.display = 'block';
+            
+            // Hide all article sections
+            document.querySelectorAll('.article-section').forEach(section => {
+                section.classList.remove('active');
+            });
+        }
+
+        // Run code function (simulated)
+        function runCode() {
+            const output = document.getElementById('output');
+            const code = document.getElementById('java-code').value;
+            
+            output.innerHTML = "<span style='color: #f1fa8c'>Running code...</span>";
+            
+            // Simulate code execution
+            setTimeout(() => {
+                if (code.includes("System.out.println")) {
+                    const matches = code.match(/System\.out\.println\(([^)]+)\)/g);
+                    let result = '';
+                    matches.forEach(match => {
+                        const content = match.substring(19, match.length - 1);
+                        result += content.replace(/"/g, '') + '\n';
+                    });
+                    output.innerHTML = result.replace(/\n/g, '<br>');
+                } else {
+                    output.innerHTML = "<span style='color: #50fa7b'>Code executed successfully! No output.</span>";
+                }
+            }, 1000);
+        }
+
+        // Clear code function
+        function clearCode() {
+            document.getElementById('java-code').value = '';
+            document.getElementById('output').innerHTML = '// Code output will appear here';
+        }
+
+        // Clear output function
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '// Code output will appear here';
+        }
+
+        // Format code function
+        function formatCode() {
+            const codeEditor = document.getElementById('java-code');
+            const code = codeEditor.value;
+            
+            // Simple formatting (just indentation)
+            const lines = code.split('\n');
+            let indentLevel = 0;
+            let formattedCode = '';
+            
+            lines.forEach(line => {
+                line = line.trim();
+                
+                if (line.includes('}')) indentLevel--;
+                
+                let indent = '';
+                for (let i = 0; i < indentLevel; i++) {
+                    indent += '    ';
+                }
+                
+                formattedCode += indent + line + '\n';
+                
+                if (line.includes('{')) indentLevel++;
+            });
+            
+            codeEditor.value = formattedCode;
+        }
+
+        // Share code function
+        function shareCode() {
+            const code = document.getElementById('java-code').value;
+            const encodedCode = encodeURIComponent(code);
+            const url = window.location.href.split('?')[0] + '?code=' + encodedCode;
+            
+            // Simulate share functionality
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this Java code',
+                    text: 'I wrote this Java code using JavaMaster Pro',
+                    url: url
+                })
+                .then(() => console.log('Shared successfully'))
+                .catch(error => console.log('Error sharing:', error));
+            } else {
+                prompt('Copy this link to share your code:', url);
+            }
+        }
+
+        // Tab functionality
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('tab')) {
+                const tabId = e.target.getAttribute('data-tab');
+                const tabContainer = e.target.closest('.article-content');
+                
+                // Remove active class from all tabs
+                tabContainer.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                e.target.classList.add('active');
+                
+                // Hide all tab content
+                tabContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show the selected tab content
+                tabContainer.getElementById(tabId).classList.add('active');
+            }
+        });
+
+        // Quiz functionality
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('quiz-option')) {
+                const option = e.target;
+                const quizContainer = option.closest('.quiz-container');
+                const feedback = quizContainer.querySelector('.quiz-feedback');
+                const isCorrect = option.getAttribute('data-correct') === 'true';
+                
+                // Remove any existing selections
+                quizContainer.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark the selected option
+                option.classList.add('selected');
+                
+                if (isCorrect) {
+                    option.classList.add('correct');
+                    feedback.textContent = 'Correct! Well done.';
+                    feedback.classList.add('correct');
+                } else {
+                    option.classList.add('incorrect');
+                    feedback.textContent = 'Incorrect. Try again.';
+                    feedback.classList.add('incorrect');
+                    
+                    // Show the correct answer
+                    quizContainer.querySelector('[data-correct="true"]').classList.add('correct');
+                }
+            }
+        });
+
+        // Check for code in URL
+        function checkForSharedCode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedCode = urlParams.get('code');
+            
+            if (sharedCode) {
+                document.getElementById('java-code').value = decodeURIComponent(sharedCode);
+            }
+        }
+
+        // Initialize
+        checkForSharedCode();
+    </script>
+</body>
+</html>
